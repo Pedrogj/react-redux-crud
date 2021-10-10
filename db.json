@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "nombre": "Jugo de Zanahoria",
+      "precio": "1000"
+    },
+    {
+      "id": 2,
+      "nombre": "Jugo de Melon",
+      "precio": "1500"
+    },
+    {
+      "id": 3,
+      "nombre": "Jugo de Naranja",
+      "precio": "1400"
+    },
+    {
+      "id": 4,
+      "nombre": "Jugo de Piña",
+      "precio": "1300"
+    },
+    {
+      "id": 5,
+      "nombre": "Jugo de Fresa",
+      "precio": "1200"
+    },
+    {
+      "name": "camaron 1kg",
+      "price": 800,
+      "id": 6
+    }
+  ]
+}
