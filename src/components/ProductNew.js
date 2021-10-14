@@ -36,7 +36,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const ProductNew = () => {
+export const ProductNew = ({ history }) => {
   const classes = useStyles();
   // state del componente
   const [name, setName] = useState("");
@@ -44,6 +44,10 @@ export const ProductNew = () => {
 
   // utilizar useDispatch y te crea una funcion
   const dispatch = useDispatch();
+
+  // acceder al state del store
+  const load = useSelector((state) => state.products.loading);
+  const error = useSelector((state) => state.products.error);
 
   // mandar llamar el action de ProductActions
   const addProduct = (product) => dispatch(createNewProductAction(product));
@@ -57,10 +61,13 @@ export const ProductNew = () => {
       return;
     }
 
-    // si hay error
+    // si no hay error
 
     // crear el nuevo producto
     addProduct({ name, price });
+
+    // redireccionanr
+    history.push("/");
   };
 
   return (
@@ -105,6 +112,16 @@ export const ProductNew = () => {
             Add Product
           </Button>
         </CardActions>
+        {load ? (
+          <Typography variant="h6" component="div">
+            loading...
+          </Typography>
+        ) : null}
+        {error ? (
+          <Typography variant="h6" component="div">
+            Hubo un error
+          </Typography>
+        ) : null}
       </Card>
     </Grid>
   );
