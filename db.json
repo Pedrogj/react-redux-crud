@@ -1,24 +1,24 @@
 {
   "products": [
     {
-      "id": 4,
-      "name": "Jugo de Piña",
-      "price": "1300"
-    },
-    {
-      "id": 5,
-      "name": "Jugo de Fresa",
-      "price": "1200"
-    },
-    {
-      "name": "camaron 1kg",
-      "price": 800,
-      "id": 6
-    },
-    {
       "name": "naranja 1kg ",
-      "price": 400,
+      "price": "500",
       "id": 7
+    },
+    {
+      "name": "leche",
+      "price": 1000,
+      "id": 8
+    },
+    {
+      "name": "melon",
+      "price": 500,
+      "id": 9
+    },
+    {
+      "name": "limon",
+      "price": 366,
+      "id": 10
     }
   ]
 }

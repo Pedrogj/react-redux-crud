@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 // Actions Redux
 import { createNewProductAction } from "../actions/ProductActions";
+import { viewAlert, hideAlertAction } from "../actions/AlertActions";
 
 const useStyles = makeStyles({
   grid: {
@@ -48,6 +49,7 @@ export const ProductNew = ({ history }) => {
   // acceder al state del store
   const load = useSelector((state) => state.products.loading);
   const error = useSelector((state) => state.products.error);
+  const alert = useSelector((state) => state.alert.alert);
 
   // mandar llamar el action de ProductActions
   const addProduct = (product) => dispatch(createNewProductAction(product));
@@ -58,10 +60,16 @@ export const ProductNew = ({ history }) => {
 
     // validar formulario
     if (name.trim() === "" || price <= 0) {
+      const alert = {
+        msg: "Ambos campos son obligatorios",
+      };
+      dispatch(viewAlert(alert));
+
       return;
     }
 
     // si no hay error
+    dispatch(hideAlertAction());
 
     // crear el nuevo producto
     addProduct({ name, price });
@@ -78,6 +86,9 @@ export const ProductNew = ({ history }) => {
             <Typography variant="h5" component="div">
               Add New Product
             </Typography>
+          </Grid>
+          <Grid>
+            {alert ? <Typography component="p">{alert.msg}</Typography> : null}
           </Grid>
           <Grid item sm={12}>
             <FormControl>
@@ -114,7 +125,7 @@ export const ProductNew = ({ history }) => {
         </CardActions>
         {load ? (
           <Typography variant="h6" component="div">
-            loading...
+            loading
           </Typography>
         ) : null}
         {error ? (

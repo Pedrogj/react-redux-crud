@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 //Mui
 import Table from "@mui/material/Table";
@@ -12,8 +12,11 @@ import Paper from "@mui/material/Paper";
 import { Button, Grid, Typography } from "@mui/material";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-import { downloadProductAction } from "../actions/ProductActions";
-import { deleteProductAction } from "../actions/ProductActions";
+import {
+  deleteProductAction,
+  downloadProductAction,
+  getProductEdit,
+} from "../actions/ProductActions";
 
 export const Products = () => {
   const dispatch = useDispatch();
@@ -24,6 +27,8 @@ export const Products = () => {
     // consultar la api
     const loadProduct = () => dispatch(downloadProductAction());
     loadProduct();
+
+    // eslint-disable-next-line
   }, []);
 
   // obtener el state
@@ -52,6 +57,7 @@ export const Products = () => {
 
   // funcion que redirige de forma programada
   const redirectEdit = (product) => {
+    dispatch(getProductEdit(product));
     history.push(`/product/edit/${product.id}`);
   };
 
@@ -60,10 +66,10 @@ export const Products = () => {
       <Grid>
         <Typography variant="h5">Products List</Typography>
         {error ? <Typography component="p">Hubo un error</Typography> : null}
-        {load ? <Typography component="p">Loading...</Typography> : null}
+        {load ? <Typography component="p">Loading</Typography> : null}
       </Grid>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 500 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
@@ -79,8 +85,8 @@ export const Products = () => {
                     <TableCell component="th" scope="row">
                       {product.name}
                     </TableCell>
-                    <TableCell align="left">$ {product.price}</TableCell>
-                    <TableCell sx={{ "& > button": { m: 1 } }} align="left">
+                    <TableCell align="left">${product.price}</TableCell>
+                    <TableCell align="left">
                       <Button
                         variant="outlined"
                         size="small"
